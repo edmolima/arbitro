@@ -147,7 +147,6 @@ packages:
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "src",
     "outDir": "dist"
   },
   "include": ["src", "tests"]
