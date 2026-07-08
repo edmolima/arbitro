@@ -1,0 +1,14 @@
+{
+  "name": "arbitro-monorepo",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "dev": "pnpm -F arbitro build && pnpm -F playground dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  }
+}
