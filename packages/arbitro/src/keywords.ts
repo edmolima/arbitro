@@ -48,7 +48,6 @@ export const STRUCTURED_PATTERNS: RegExp[] = [
   /\bformato\s+json\b/i,
   /\btabela\b/i,
   /\btable\b/i,
-  /\bcsv\b/i,
   /\bchaves?\b/i,
   /\bkeys?\b/i,
   /\bschema\b/i,

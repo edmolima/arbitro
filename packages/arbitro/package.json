@@ -15,6 +15,9 @@
   },
   "files": ["dist"],
   "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
