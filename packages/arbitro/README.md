@@ -17,16 +17,23 @@ import { judge } from "arbitro";
 
 const decision = judge("escreva uma função de merge sort em rust com testes");
 // {
-//   model: "anthropic/claude-opus-4.1",
-//   alternatives: ["google/gemini-2.5-pro", "openai/o3", ...],
+//   model: "deepseek/deepseek-chat",
+//   alternatives: [
+//     "anthropic/claude-sonnet-4.5",
+//     "openai/gpt-4o",
+//     "anthropic/claude-haiku-4.5"
+//   ],
 //   task: "code",
-//   complexity: "high",
+//   complexity: "medium",
 //   needs_structured_output: false,
-//   confidence: 0.78,
-//   reason: "code/high (confiança 0.78) → anthropic/claude-opus-4.1",
+//   confidence: 0.93,
+//   reason: "code/medium (confiança 0.93) → deepseek/deepseek-chat",
 //   catalogVersion: "2026-07-08.1"
 // }
 ```
+
+The default balances cost and quality (`costPreference: 0.5`), so a coding task routes to a
+cheap-but-strong model. Ask for quality and the same prompt upgrades:
 
 ### Tuning cost vs quality
 
@@ -35,7 +42,12 @@ import { createArbitro } from "arbitro";
 
 const cheap = createArbitro({ costPreference: 0 });   // favor cheapest
 const premium = createArbitro({ costPreference: 1 }); // favor best quality
-cheap.judge("resuma este texto");
+
+premium.judge("escreva uma função de merge sort em rust com testes").model;
+// → "anthropic/claude-opus-4.1"
+
+cheap.judge("resuma este texto").model;
+// → a low-cost model such as "anthropic/claude-haiku-4.5"
 ```
 
 ### Custom catalog
