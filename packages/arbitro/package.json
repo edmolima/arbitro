@@ -2,6 +2,26 @@
   "name": "arbitro",
   "version": "0.1.0",
   "description": "Deterministic model router — picks the best OpenRouter model for a prompt before you call it.",
+  "license": "MIT",
+  "author": "Edmo Lima <edmo.lima@afparcapital.com>",
+  "keywords": [
+    "openrouter",
+    "llm",
+    "model-router",
+    "routing",
+    "ai",
+    "deterministic",
+    "cost-optimization"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edmolima/arbitro.git",
+    "directory": "packages/arbitro"
+  },
+  "homepage": "https://github.com/edmolima/arbitro#readme",
+  "bugs": {
+    "url": "https://github.com/edmolima/arbitro/issues"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
