@@ -8,8 +8,7 @@
     "batch": "tsx src/index.ts --batch",
     "openrouter": "tsx src/openrouter.ts",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit",
-    "pretest": "pnpm -F @edmolima/arbitro build"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@edmolima/arbitro": "workspace:*"

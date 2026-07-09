@@ -9,7 +9,7 @@
   "packageManager": "pnpm@10.33.0",
   "scripts": {
     "build": "pnpm -r build",
-    "test": "pnpm -r test",
+    "test": "pnpm -F @edmolima/arbitro build && pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "dev": "pnpm -F @edmolima/arbitro build && pnpm -F playground dev",
     "eval": "pnpm -F @arbitro/eval eval"

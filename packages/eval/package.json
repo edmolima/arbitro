@@ -8,7 +8,6 @@
     "generate": "tsx scripts/generate.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "pretest": "pnpm -F @edmolima/arbitro build",
     "preeval": "pnpm -F @edmolima/arbitro build"
   },
   "dependencies": {
