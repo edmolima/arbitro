@@ -60,6 +60,40 @@ cheap.judge("summarize this text").model;
 
 Pass your own `catalog` to `createArbitro` to override the built-in model list.
 
+## Calling the model (OpenRouter)
+
+arbitro only *decides* — you make the real call. Since it returns an OpenRouter
+model slug, sending the request is a few lines of `fetch` (no SDK needed):
+
+```ts
+import { judge } from "arbitro";
+
+async function ask(prompt: string, apiKey = process.env.OPENROUTER_API_KEY!) {
+  const decision = judge(prompt); // ← arbitro picks the model
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: decision.model, // ← use the slug it chose
+      messages: [{ role: "user", content: prompt }],
+    }),
+  });
+  const json = await res.json();
+  return json.choices[0].message.content;
+}
+```
+
+A runnable version lives in the playground:
+
+```bash
+OPENROUTER_API_KEY=sk-... pnpm -F playground openrouter "write a python script to parse a CSV file"
+```
+
+Without the key it prints a hint and sends nothing — safe to run in CI.
+
 ## Monorepo structure
 
 | Path                   | What it is                                             |
