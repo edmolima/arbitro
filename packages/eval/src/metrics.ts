@@ -1,4 +1,4 @@
-import type { CostTier } from "arbitro";
+import type { CostTier } from "@edmolima/arbitro";
 
 export function accuracy(expected: string[], predicted: string[]): number {
   if (expected.length === 0) return 1;

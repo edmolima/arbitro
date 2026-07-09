@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { predict } from "../src/runner";
 import type { EvalDataset } from "../src/types";
-import { DEFAULT_CATALOG } from "arbitro";
+import { DEFAULT_CATALOG } from "@edmolima/arbitro";
 
 const dataset: EvalDataset = {
   version: "fixture.1",

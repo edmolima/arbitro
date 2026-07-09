@@ -1,4 +1,4 @@
-import type { Task, CostTier } from "arbitro";
+import type { Task, CostTier } from "@edmolima/arbitro";
 import type { EvalDataset } from "./types";
 import { predict } from "./runner";
 import {

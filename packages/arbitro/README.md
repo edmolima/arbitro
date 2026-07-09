@@ -6,14 +6,23 @@ reproducible.
 
 ## Install
 
+Published to GitHub Packages. Add to your project's `.npmrc`:
+
+```
+@edmolima:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+(`GITHUB_TOKEN` = a personal access token with `read:packages`.) Then:
+
 ```bash
-npm i arbitro
+npm i @edmolima/arbitro
 ```
 
 ## Usage
 
 ```ts
-import { judge } from "arbitro";
+import { judge } from "@edmolima/arbitro";
 
 const decision = judge("write a merge sort function in rust with tests");
 // {
@@ -38,7 +47,7 @@ cheap-but-strong model. Ask for quality and the same prompt upgrades:
 ### Tuning cost vs quality
 
 ```ts
-import { createArbitro } from "arbitro";
+import { createArbitro } from "@edmolima/arbitro";
 
 const cheap = createArbitro({ costPreference: 0 });   // favor cheapest
 const premium = createArbitro({ costPreference: 1 }); // favor best quality

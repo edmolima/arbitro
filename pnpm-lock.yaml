@@ -14,7 +14,7 @@ importers:
 
   examples/playground:
     dependencies:
-      arbitro:
+      '@edmolima/arbitro':
         specifier: workspace:*
         version: link:../../packages/arbitro
     devDependencies:
@@ -45,7 +45,7 @@ importers:
 
   packages/eval:
     dependencies:
-      arbitro:
+      '@edmolima/arbitro':
         specifier: workspace:*
         version: link:../arbitro
     devDependencies:

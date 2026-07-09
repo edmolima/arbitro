@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release of `arbitro`: a deterministic, offline model router for
+- Initial release of `@edmolima/arbitro`: a deterministic, offline model router for
   OpenRouter. Given a prompt, `judge()` returns the best model slug, ranked
   alternatives, an inferred task/complexity, and a confidence heuristic —
   with no network calls.

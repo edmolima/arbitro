@@ -1,6 +1,6 @@
 // End-to-end example: let arbitro pick a model, then actually call it on
 // OpenRouter (an OpenAI-compatible endpoint) using native fetch — no SDK.
-import { judge, type JudgeResult } from "arbitro";
+import { judge, type JudgeResult } from "@edmolima/arbitro";
 
 export const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 

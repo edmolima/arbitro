@@ -1,4 +1,4 @@
-import type { Task, Complexity, CostTier } from "arbitro";
+import type { Task, Complexity, CostTier } from "@edmolima/arbitro";
 
 export interface EvalCase {
   id: string;

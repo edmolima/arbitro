@@ -1,4 +1,4 @@
-import { createArbitro } from "arbitro";
+import { createArbitro } from "@edmolima/arbitro";
 import { SAMPLE_PROMPTS } from "./prompts";
 
 export interface BatchRow {

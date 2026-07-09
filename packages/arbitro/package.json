@@ -1,5 +1,5 @@
 {
-  "name": "arbitro",
+  "name": "@edmolima/arbitro",
   "version": "0.1.0",
   "description": "Deterministic model router — picks the best OpenRouter model for a prompt before you call it.",
   "license": "MIT",
@@ -35,6 +35,10 @@
   },
   "files": ["dist"],
   "sideEffects": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
   "engines": {
     "node": ">=18"
   },

@@ -9,7 +9,7 @@ import {
   recall,
   TIER_COST,
 } from "../src/metrics";
-import type { CostTier } from "arbitro";
+import type { CostTier } from "@edmolima/arbitro";
 
 describe("accuracy", () => {
   it("is the fraction of exact matches", () => {

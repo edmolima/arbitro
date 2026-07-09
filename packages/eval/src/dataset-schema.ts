@@ -1,4 +1,4 @@
-import type { Task, Complexity, CostTier } from "arbitro";
+import type { Task, Complexity, CostTier } from "@edmolima/arbitro";
 
 const TASKS: Task[] = ["chat", "summary", "code", "research", "json_extraction", "translation"];
 const COMPLEXITIES: Complexity[] = ["low", "medium", "high"];

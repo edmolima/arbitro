@@ -1,5 +1,5 @@
 import { createInterface } from "node:readline";
-import { createArbitro } from "arbitro";
+import { createArbitro } from "@edmolima/arbitro";
 import { runBatch } from "./batch";
 
 function printBatch(costPreference: number): void {

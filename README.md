@@ -17,14 +17,26 @@ real call yourself — arbitro only tells you which slug to send.
 
 ## Install
 
+Published to [GitHub Packages](https://docs.github.com/en/packages) as
+`@edmolima/arbitro`. Installing from GitHub Packages requires a one-time
+registry setup — add this to the `.npmrc` in your project (or `~/.npmrc`):
+
+```
+@edmolima:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+`GITHUB_TOKEN` must be a GitHub personal access token with the `read:packages`
+scope. Then:
+
 ```bash
-npm i arbitro
+npm i @edmolima/arbitro
 ```
 
 ## Quickstart
 
 ```ts
-import { judge } from "arbitro";
+import { judge } from "@edmolima/arbitro";
 
 const decision = judge("write a merge sort function in rust with tests");
 // {
@@ -46,7 +58,7 @@ const decision = judge("write a merge sort function in rust with tests");
 ## Tuning cost vs quality
 
 ```ts
-import { createArbitro } from "arbitro";
+import { createArbitro } from "@edmolima/arbitro";
 
 const cheap = createArbitro({ costPreference: 0 });   // favor cheapest
 const premium = createArbitro({ costPreference: 1 }); // favor best quality
@@ -66,7 +78,7 @@ arbitro only *decides* — you make the real call. Since it returns an OpenRoute
 model slug, sending the request is a few lines of `fetch` (no SDK needed):
 
 ```ts
-import { judge } from "arbitro";
+import { judge } from "@edmolima/arbitro";
 
 async function ask(prompt: string, apiKey = process.env.OPENROUTER_API_KEY!) {
   const decision = judge(prompt); // ← arbitro picks the model

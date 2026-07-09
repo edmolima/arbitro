@@ -1,5 +1,5 @@
-import { createArbitro, DEFAULT_CATALOG } from "arbitro";
-import type { CostTier } from "arbitro";
+import { createArbitro, DEFAULT_CATALOG } from "@edmolima/arbitro";
+import type { CostTier } from "@edmolima/arbitro";
 import type { EvalDataset, Prediction } from "./types";
 
 const SLUG_TIER: Record<string, CostTier> = Object.fromEntries(

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { judge } from "arbitro";
+import { judge } from "@edmolima/arbitro";
 import { buildRequest, ask, OPENROUTER_URL } from "../src/openrouter";
 
 const PROMPT = "write a python script to parse a CSV file";
