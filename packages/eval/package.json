@@ -1,0 +1,23 @@
+{
+  "name": "@arbitro/eval",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "eval": "tsx src/index.ts",
+    "generate": "tsx scripts/generate.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "pretest": "pnpm -F arbitro build",
+    "preeval": "pnpm -F arbitro build"
+  },
+  "dependencies": {
+    "arbitro": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "vitest": "^2.1.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.10.0"
+  }
+}
