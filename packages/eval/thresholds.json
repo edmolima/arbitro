@@ -1,0 +1,6 @@
+{
+  "minTaskAccuracy": 0.6,
+  "minComplexityAccuracy": 0.5,
+  "minStructuredAccuracy": 0.8,
+  "maxUnderProvisionRate": 0.4
+}
