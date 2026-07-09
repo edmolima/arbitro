@@ -14,6 +14,9 @@ export type {
 
 export { DEFAULT_CATALOG } from "./catalog";
 
+export { toOpenRouterBody } from "./openrouter";
+export type { OpenRouterBody, OpenRouterMessage } from "./openrouter";
+
 const DEFAULT_COST_PREFERENCE = 0.5;
 
 export function judge(prompt: string): JudgeResult {
