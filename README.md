@@ -127,7 +127,12 @@ Without the key it prints a hint and sends nothing — safe to run in CI.
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md). By participating you agree to the
-[Code of Conduct](./CODE_OF_CONDUCT.md).
+[Code of Conduct](./CODE_OF_CONDUCT.md). Report vulnerabilities per
+[SECURITY.md](./SECURITY.md).
+
+**Working with an AI agent?** Read [AGENTS.md](./AGENTS.md) — it documents the
+commands, conventions, and the hard boundaries (zero-dependency, offline,
+behavior-preserving routing).
 
 ## License
 

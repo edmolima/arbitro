@@ -1,0 +1,27 @@
+# arbitro
+
+> `@edmolima/arbitro` is a deterministic, offline model router for OpenRouter.
+> Given a prompt, `judge()` returns the best model to use — the chosen `ModelEntry`,
+> ranked alternatives, an inferred task/complexity, a structured-output flag, and a
+> confidence heuristic — with no network calls and no runtime dependencies. You make
+> the actual model call yourself using `decision.model.slug`.
+
+Key facts:
+
+- Pure and reproducible: same prompt → same decision. The engine never calls OpenRouter to decide.
+- Tunable cost-vs-quality via `createArbitro({ costPreference })` (0 = cheapest, 1 = best).
+- `toOpenRouterBody(decision, prompt)` builds the OpenRouter chat-completion request body.
+- TypeScript, ESM, Node >= 18. Published to GitHub Packages as `@edmolima/arbitro`.
+
+## Docs
+
+- [README](https://github.com/edmolima/arbitro/blob/main/README.md): overview, quickstart, API, cost tuning, OpenRouter call.
+- [Consuming guide](https://github.com/edmolima/arbitro/blob/main/docs/consuming.md): installing from GitHub Packages (token, .npmrc, CI, troubleshooting).
+- [Package README](https://github.com/edmolima/arbitro/blob/main/packages/arbitro/README.md): the library's own usage docs.
+- [CHANGELOG](https://github.com/edmolima/arbitro/blob/main/CHANGELOG.md): versioned changes (current: 0.2.0).
+
+## Contributing
+
+- [AGENTS.md](https://github.com/edmolima/arbitro/blob/main/AGENTS.md): agent/dev guide — commands, conventions, and hard boundaries (zero-dep, offline, behavior-preserving).
+- [CONTRIBUTING](https://github.com/edmolima/arbitro/blob/main/CONTRIBUTING.md): setup, commands, PR flow, release process.
+- [SECURITY](https://github.com/edmolima/arbitro/blob/main/SECURITY.md): how to report vulnerabilities.
