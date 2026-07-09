@@ -3,6 +3,10 @@
 [![CI](https://github.com/edmolima/arbitro/actions/workflows/ci.yml/badge.svg)](https://github.com/edmolima/arbitro/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
+<p align="center">
+  <img src="./assets/referee.webp" alt="arbitro — the referee that calls the model" width="480">
+</p>
+
 Deterministic model router. Given a prompt, arbitro tells you the **best
 OpenRouter model** to use — before you spend the call. No network, no
 dependencies, fully synchronous and reproducible.
