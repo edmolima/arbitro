@@ -1,0 +1,23 @@
+{
+  "version": "2026-07-09.bootstrap",
+  "cases": [
+    { "id": "chat-001", "prompt": "oi, tudo bem?", "lang": "pt", "expected": { "task": "chat", "complexity": "low", "needs_structured_output": false, "tier": "low" }, "tags": ["chat", "trivial", "pt"] },
+    { "id": "chat-002", "prompt": "hello, how are you?", "lang": "en", "expected": { "task": "chat", "complexity": "low", "needs_structured_output": false, "tier": "low" }, "tags": ["chat", "trivial", "en"] },
+    { "id": "chat-003", "prompt": "me ajuda com isso aqui por favor", "lang": "pt", "expected": { "task": "chat", "complexity": "medium", "needs_structured_output": false, "tier": "medium" }, "tags": ["chat", "ambiguous", "pt"] },
+    { "id": "summary-001", "prompt": "resuma este relatório técnico de rede em 3 linhas", "lang": "pt", "expected": { "task": "summary", "complexity": "medium", "needs_structured_output": false, "tier": "low" }, "tags": ["summary", "pt"] },
+    { "id": "summary-002", "prompt": "summarize this article about databases", "lang": "en", "expected": { "task": "summary", "complexity": "medium", "needs_structured_output": false, "tier": "low" }, "tags": ["summary", "en"] },
+    { "id": "translation-001", "prompt": "traduza este parágrafo para o inglês", "lang": "pt", "expected": { "task": "translation", "complexity": "medium", "needs_structured_output": false, "tier": "low" }, "tags": ["translation", "pt"] },
+    { "id": "translation-002", "prompt": "translate this document to spanish", "lang": "en", "expected": { "task": "translation", "complexity": "medium", "needs_structured_output": false, "tier": "low" }, "tags": ["translation", "en"] },
+    { "id": "code-001", "prompt": "escreva uma função de merge sort em rust com testes", "lang": "pt", "expected": { "task": "code", "complexity": "medium", "needs_structured_output": false, "tier": "medium" }, "tags": ["code", "pt"] },
+    { "id": "code-002", "prompt": "write a python script to read a file line by line", "lang": "en", "expected": { "task": "code", "complexity": "medium", "needs_structured_output": false, "tier": "medium" }, "tags": ["code", "en"] },
+    { "id": "code-003", "prompt": "refatore este algoritmo recursivo para uma versão iterativa", "lang": "pt", "expected": { "task": "code", "complexity": "medium", "needs_structured_output": false, "tier": "medium" }, "tags": ["code", "pt"] },
+    { "id": "research-001", "prompt": "prove que este algoritmo distribuído é livre de deadlock", "lang": "pt", "expected": { "task": "research", "complexity": "high", "needs_structured_output": false, "tier": "high" }, "tags": ["research", "pt"] },
+    { "id": "research-002", "prompt": "analise a fundo os trade-offs de arquitetura de software para um sistema distribuído de alta escala", "lang": "pt", "expected": { "task": "research", "complexity": "high", "needs_structured_output": false, "tier": "high" }, "tags": ["research", "pt"] },
+    { "id": "research-003", "prompt": "demonstre em detalhes o teorema fundamental do cálculo", "lang": "pt", "expected": { "task": "research", "complexity": "high", "needs_structured_output": false, "tier": "high" }, "tags": ["research", "pt"] },
+    { "id": "json-001", "prompt": "extraia nome e email deste texto e devolva em JSON", "lang": "pt", "expected": { "task": "json_extraction", "complexity": "low", "needs_structured_output": true, "tier": "low" }, "tags": ["json_extraction", "structured", "pt"] },
+    { "id": "json-002", "prompt": "gere uma tabela com os endpoints e seus métodos HTTP", "lang": "pt", "expected": { "task": "json_extraction", "complexity": "low", "needs_structured_output": true, "tier": "low" }, "tags": ["json_extraction", "structured", "pt"] },
+    { "id": "json-003", "prompt": "return the parsed fields as a JSON object with keys name and age", "lang": "en", "expected": { "task": "json_extraction", "complexity": "low", "needs_structured_output": true, "tier": "low" }, "tags": ["json_extraction", "structured", "en"] },
+    { "id": "chat-004", "prompt": "obrigado pela ajuda!", "lang": "pt", "expected": { "task": "chat", "complexity": "low", "needs_structured_output": false, "tier": "low" }, "tags": ["chat", "trivial", "pt"] },
+    { "id": "summary-003", "prompt": "faça um tl;dr deste texto longo sobre economia", "lang": "pt", "expected": { "task": "summary", "complexity": "medium", "needs_structured_output": false, "tier": "low" }, "tags": ["summary", "pt"] }
+  ]
+}
