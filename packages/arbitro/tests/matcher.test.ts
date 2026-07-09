@@ -6,7 +6,7 @@ import type { Classification } from "../src/types";
 const c = (over: Partial<Classification>): Classification => ({
   task: "chat",
   complexity: "low",
-  needs_structured_output: false,
+  needsStructuredOutput: false,
   confidence: 0.8,
   ...over,
 });
@@ -14,28 +14,28 @@ const c = (over: Partial<Classification>): Classification => ({
 describe("pickModel", () => {
   it("code + high + quality preference → a high-capability code model", () => {
     const r = pickModel(c({ task: "code", complexity: "high" }), 0.8, DEFAULT_CATALOG);
-    expect(r.model).toBe("anthropic/claude-opus-4.1");
+    expect(r.model.slug).toBe("anthropic/claude-opus-4.1");
   });
 
   it("chat + low + cost preference → cheapest fit (deterministic tie-break)", () => {
     const r = pickModel(c({ task: "chat", complexity: "low" }), 0.2, DEFAULT_CATALOG);
-    expect(r.model).toBe("anthropic/claude-haiku-4.5");
+    expect(r.model.slug).toBe("anthropic/claude-haiku-4.5");
   });
 
   it("structured output required → only structured-capable models are chosen", () => {
     const r = pickModel(
-      c({ task: "json_extraction", complexity: "low", needs_structured_output: true }),
+      c({ task: "json_extraction", complexity: "low", needsStructuredOutput: true }),
       0.5,
       DEFAULT_CATALOG,
     );
-    const chosen = [r.model, ...r.alternatives];
+    const chosen = [r.model, ...r.alternatives].map((m) => m.slug);
     expect(chosen).not.toContain("deepseek/deepseek-chat");
   });
 
   it("returns up to 3 alternatives, excluding the winner", () => {
     const r = pickModel(c({ task: "chat", complexity: "low" }), 0.5, DEFAULT_CATALOG);
     expect(r.alternatives.length).toBeLessThanOrEqual(3);
-    expect(r.alternatives).not.toContain(r.model);
+    expect(r.alternatives.map((a) => a.slug)).not.toContain(r.model.slug);
   });
 
   it("clamps out-of-range costPreference without throwing", () => {

@@ -24,7 +24,7 @@ export interface Signals {
 export interface Classification {
   task: Task;
   complexity: Complexity;
-  needs_structured_output: boolean;
+  needsStructuredOutput: boolean;
   confidence: number;
 }
 
@@ -42,11 +42,11 @@ export interface ModelCatalog {
 }
 
 export interface JudgeResult {
-  model: string;
-  alternatives: string[];
+  model: ModelEntry;
+  alternatives: ModelEntry[];
   task: Task;
   complexity: Complexity;
-  needs_structured_output: boolean;
+  needsStructuredOutput: boolean;
   confidence: number;
   reason: string;
   catalogVersion: string;

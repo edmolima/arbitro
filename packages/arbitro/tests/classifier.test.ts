@@ -8,7 +8,7 @@ describe("classify", () => {
   it("rule 4: explicit JSON request → json_extraction + structured", () => {
     const d = decide("extraia nome e email deste texto e devolva em JSON");
     expect(d.task).toBe("json_extraction");
-    expect(d.needs_structured_output).toBe(true);
+    expect(d.needsStructuredOutput).toBe(true);
     expect(d.confidence).toBeGreaterThan(0.7);
   });
 

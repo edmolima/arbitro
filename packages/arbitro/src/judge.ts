@@ -1,4 +1,4 @@
-import type { Classification, JudgeResult, ModelCatalog } from "./types";
+import type { Classification, JudgeResult, ModelCatalog, ModelEntry } from "./types";
 import { extractSignals } from "./signals";
 import { classify } from "./classifier";
 import { pickModel } from "./matcher";
@@ -7,9 +7,9 @@ function clamp(n: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, n));
 }
 
-function buildReason(c: Classification, model: string, isEmpty: boolean): string {
-  if (isEmpty) return `prompt vazio → decisão trivial: ${model}`;
-  return `${c.task}/${c.complexity} (confiança ${c.confidence.toFixed(2)}) → ${model}`;
+function buildReason(c: Classification, model: ModelEntry, isEmpty: boolean): string {
+  if (isEmpty) return `empty prompt → trivial decision: ${model.slug}`;
+  return `${c.task}/${c.complexity} (confidence ${c.confidence.toFixed(2)}) → ${model.slug}`;
 }
 
 export function judgeWith(
@@ -21,7 +21,7 @@ export function judgeWith(
   const isEmpty = prompt.trim().length === 0;
 
   const classification: Classification = isEmpty
-    ? { task: "chat", complexity: "low", needs_structured_output: false, confidence: 0.2 }
+    ? { task: "chat", complexity: "low", needsStructuredOutput: false, confidence: 0.2 }
     : classify(extractSignals(prompt));
 
   const { model, alternatives } = pickModel(classification, cp, catalog);
@@ -31,7 +31,7 @@ export function judgeWith(
     alternatives,
     task: classification.task,
     complexity: classification.complexity,
-    needs_structured_output: classification.needs_structured_output,
+    needsStructuredOutput: classification.needsStructuredOutput,
     confidence: classification.confidence,
     reason: buildReason(classification, model, isEmpty),
     catalogVersion: catalog.version,

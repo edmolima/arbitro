@@ -24,11 +24,11 @@ export function pickModel(
   c: Classification,
   costPreference: number,
   catalog: ModelCatalog,
-): { model: string; alternatives: string[] } {
+): { model: ModelEntry; alternatives: ModelEntry[] } {
   const cp = clamp(costPreference, 0, 1);
 
   let candidates = catalog.models;
-  if (c.needs_structured_output) {
+  if (c.needsStructuredOutput) {
     const structured = candidates.filter((m) => m.supportsStructuredOutput);
     if (structured.length > 0) candidates = structured; // graceful fallback if none
   }
@@ -40,9 +40,15 @@ export function pickModel(
     return a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0;
   });
 
-  const winner = ranked[0];
+  const fallback: ModelEntry = {
+    slug: "",
+    strengths: [],
+    costTier: "low",
+    contextWindow: 0,
+    supportsStructuredOutput: false,
+  };
   return {
-    model: winner ? winner.slug : "",
-    alternatives: ranked.slice(1, 4).map((m) => m.slug),
+    model: ranked[0] ?? fallback,
+    alternatives: ranked.slice(1, 4),
   };
 }

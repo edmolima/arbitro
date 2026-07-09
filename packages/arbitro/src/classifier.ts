@@ -59,7 +59,7 @@ export function classify(s: Signals): Classification {
     return {
       task: "json_extraction",
       complexity: maxComplexity(signalComplexity(s), "low"),
-      needs_structured_output: true,
+      needsStructuredOutput: true,
       confidence: 0.85,
     };
   }
@@ -69,10 +69,10 @@ export function classify(s: Signals): Classification {
   // No task keyword matched: distinguish trivial chat from genuinely ambiguous.
   if (totalHits === 0) {
     if (s.isTrivialChat) {
-      return { task: "chat", complexity: "low", needs_structured_output: false, confidence: 0.8 };
+      return { task: "chat", complexity: "low", needsStructuredOutput: false, confidence: 0.8 };
     }
     // Rule 5: ambiguous → conservative (balanced) with low confidence.
-    return { task: "chat", complexity: "medium", needs_structured_output: false, confidence: 0.35 };
+    return { task: "chat", complexity: "medium", needsStructuredOutput: false, confidence: 0.35 };
   }
 
   const task = topTask(s.taskHits);
@@ -83,5 +83,5 @@ export function classify(s: Signals): Classification {
   const volume = Math.min(topHits / 3, 1);
   const confidence = clamp(0.4 + 0.4 * dominance + 0.2 * volume, 0, 1);
 
-  return { task, complexity, needs_structured_output: false, confidence };
+  return { task, complexity, needsStructuredOutput: false, confidence };
 }
