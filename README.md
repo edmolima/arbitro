@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
-  <img src="./assets/referee.webp" alt="arbitro — the referee that calls the model" width="480">
+  <img src="./assets/referee.png" alt="arbitro — the referee that calls the model" width="480">
 </p>
 
 Deterministic model router. Given a prompt, arbitro tells you the **best
