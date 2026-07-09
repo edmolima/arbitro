@@ -19,6 +19,22 @@ engine classifies the prompt (task, complexity, structured-output needs) and
 ranks your catalog by a tunable cost-vs-quality tradeoff. You still make the
 real call yourself — arbitro only tells you which slug to send.
 
+## How it works
+
+```mermaid
+flowchart LR
+    P["prompt"] --> S["extract signals<br/>length · code · math · keywords"]
+    S --> C["classify<br/>task · complexity · structured?"]
+    CAT[("model catalog")] --> M["score & rank<br/>quality vs cost (costPreference)"]
+    C --> M
+    M --> R["JudgeResult<br/>model + ranked alternatives"]
+    R -. "toOpenRouterBody()" .-> API["your call → OpenRouter"]
+```
+
+Everything left of the dashed arrow is pure, synchronous, and offline — no network,
+no dependencies. `judge()` runs the whole pipeline and hands back the decision; you
+make the actual model call yourself with `decision.model.slug`.
+
 ## Install
 
 Published to [GitHub Packages](https://docs.github.com/en/packages) as
