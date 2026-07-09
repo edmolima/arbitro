@@ -15,7 +15,7 @@ npm i arbitro
 ```ts
 import { judge } from "arbitro";
 
-const decision = judge("escreva uma função de merge sort em rust com testes");
+const decision = judge("write a merge sort function in rust with tests");
 // {
 //   model: "deepseek/deepseek-chat",
 //   alternatives: [
@@ -27,7 +27,7 @@ const decision = judge("escreva uma função de merge sort em rust com testes");
 //   complexity: "medium",
 //   needs_structured_output: false,
 //   confidence: 0.93,
-//   reason: "code/medium (confiança 0.93) → deepseek/deepseek-chat",
+//   reason: "code/medium (confidence 0.93) → deepseek/deepseek-chat",
 //   catalogVersion: "2026-07-08.1"
 // }
 ```
@@ -43,10 +43,10 @@ import { createArbitro } from "arbitro";
 const cheap = createArbitro({ costPreference: 0 });   // favor cheapest
 const premium = createArbitro({ costPreference: 1 }); // favor best quality
 
-premium.judge("escreva uma função de merge sort em rust com testes").model;
+premium.judge("write a merge sort function in rust with tests").model;
 // → "anthropic/claude-opus-4.1"
 
-cheap.judge("resuma este texto").model;
+cheap.judge("summarize this text").model;
 // → a low-cost model such as "anthropic/claude-haiku-4.5"
 ```
 
