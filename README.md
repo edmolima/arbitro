@@ -47,19 +47,18 @@ import { judge } from "@edmolima/arbitro";
 
 const decision = judge("write a merge sort function in rust with tests");
 // {
-//   model: "deepseek/deepseek-chat",
-//   alternatives: [
-//     "anthropic/claude-sonnet-4.5",
-//     "openai/gpt-4o",
-//     "anthropic/claude-haiku-4.5"
-//   ],
+//   model: { slug: "deepseek/deepseek-chat", costTier: "low",
+//            contextWindow: 64000, supportsStructuredOutput: false, strengths: [...] },
+//   alternatives: [ { slug: "anthropic/claude-sonnet-4.5", ... }, ... ],
 //   task: "code",
 //   complexity: "medium",
-//   needs_structured_output: false,
+//   needsStructuredOutput: false,
 //   confidence: 0.93,
 //   reason: "code/medium (confidence 0.93) → deepseek/deepseek-chat",
 //   catalogVersion: "2026-07-08.1"
 // }
+
+decision.model.slug; // → the OpenRouter slug to call
 ```
 
 ## Tuning cost vs quality
@@ -70,10 +69,10 @@ import { createArbitro } from "@edmolima/arbitro";
 const cheap = createArbitro({ costPreference: 0 });   // favor cheapest
 const premium = createArbitro({ costPreference: 1 }); // favor best quality
 
-premium.judge("write a merge sort function in rust with tests").model;
+premium.judge("write a merge sort function in rust with tests").model.slug;
 // → "anthropic/claude-opus-4.1"
 
-cheap.judge("summarize this text").model;
+cheap.judge("summarize this text").model.slug;
 // → a low-cost model such as "anthropic/claude-haiku-4.5"
 ```
 
@@ -85,7 +84,7 @@ arbitro only *decides* — you make the real call. Since it returns an OpenRoute
 model slug, sending the request is a few lines of `fetch` (no SDK needed):
 
 ```ts
-import { judge } from "@edmolima/arbitro";
+import { judge, toOpenRouterBody } from "@edmolima/arbitro";
 
 async function ask(prompt: string, apiKey = process.env.OPENROUTER_API_KEY!) {
   const decision = judge(prompt); // ← arbitro picks the model
@@ -95,10 +94,7 @@ async function ask(prompt: string, apiKey = process.env.OPENROUTER_API_KEY!) {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      model: decision.model, // ← use the slug it chose
-      messages: [{ role: "user", content: prompt }],
-    }),
+    body: JSON.stringify(toOpenRouterBody(decision, prompt)), // ← { model, messages }
   });
   const json = await res.json();
   return json.choices[0].message.content;

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-09
+
+### Changed
+
+- **Breaking:** `JudgeResult.model` and `JudgeResult.alternatives` are now full
+  `ModelEntry` objects instead of slug strings. Use `decision.model.slug` for the
+  OpenRouter call.
+- **Breaking:** `JudgeResult.needs_structured_output` renamed to
+  `needsStructuredOutput` (camelCase, consistent with the rest of the API).
+- `reason` strings are now in English.
+
+### Added
+
+- `toOpenRouterBody(decision, prompt)` — a pure helper that builds the
+  OpenRouter (OpenAI-compatible) chat-completion request body.
+
 ## [0.1.0] - 2026-07-09
 
 ### Added
@@ -19,5 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   a custom model catalog.
 - `@arbitro/eval` evaluation harness with an offline dataset and CI threshold gate.
 
-[Unreleased]: https://github.com/edmolima/arbitro/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/edmolima/arbitro/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/edmolima/arbitro/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/edmolima/arbitro/releases/tag/v0.1.0

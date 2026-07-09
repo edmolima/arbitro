@@ -26,19 +26,18 @@ import { judge } from "@edmolima/arbitro";
 
 const decision = judge("write a merge sort function in rust with tests");
 // {
-//   model: "deepseek/deepseek-chat",
-//   alternatives: [
-//     "anthropic/claude-sonnet-4.5",
-//     "openai/gpt-4o",
-//     "anthropic/claude-haiku-4.5"
-//   ],
+//   model: { slug: "deepseek/deepseek-chat", costTier: "low",
+//            contextWindow: 64000, supportsStructuredOutput: false, strengths: [...] },
+//   alternatives: [ { slug: "anthropic/claude-sonnet-4.5", ... }, ... ],
 //   task: "code",
 //   complexity: "medium",
-//   needs_structured_output: false,
+//   needsStructuredOutput: false,
 //   confidence: 0.93,
 //   reason: "code/medium (confidence 0.93) → deepseek/deepseek-chat",
 //   catalogVersion: "2026-07-08.1"
 // }
+
+decision.model.slug; // → the OpenRouter slug to call
 ```
 
 The default balances cost and quality (`costPreference: 0.5`), so a coding task routes to a
@@ -52,10 +51,10 @@ import { createArbitro } from "@edmolima/arbitro";
 const cheap = createArbitro({ costPreference: 0 });   // favor cheapest
 const premium = createArbitro({ costPreference: 1 }); // favor best quality
 
-premium.judge("write a merge sort function in rust with tests").model;
+premium.judge("write a merge sort function in rust with tests").model.slug;
 // → "anthropic/claude-opus-4.1"
 
-cheap.judge("summarize this text").model;
+cheap.judge("summarize this text").model.slug;
 // → a low-cost model such as "anthropic/claude-haiku-4.5"
 ```
 
