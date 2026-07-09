@@ -1,6 +1,8 @@
 {
   "minTaskAccuracy": 0.6,
-  "minComplexityAccuracy": 0.5,
+  "minComplexityAccuracy": 0.65,
   "minStructuredAccuracy": 0.8,
-  "maxUnderProvisionRate": 0.4
+  "maxUnderProvisionRate": 0.4,
+  "minStructuredRecall": 0.85,
+  "maxOverProvisionRate": 0.25
 }

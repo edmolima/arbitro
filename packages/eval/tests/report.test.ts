@@ -35,11 +35,11 @@ describe("formatReport", () => {
 describe("checkThresholds", () => {
   const report = evaluate(dataset);
   it("passes when all thresholds are met", () => {
-    const t: Thresholds = { minTaskAccuracy: 0, minComplexityAccuracy: 0, minStructuredAccuracy: 0, maxUnderProvisionRate: 1 };
+    const t: Thresholds = { minTaskAccuracy: 0, minComplexityAccuracy: 0, minStructuredAccuracy: 0, maxUnderProvisionRate: 1, minStructuredRecall: 0, maxOverProvisionRate: 1 };
     expect(checkThresholds(report, t).passed).toBe(true);
   });
   it("fails and lists the offending metric when a threshold is not met", () => {
-    const t: Thresholds = { minTaskAccuracy: 1.1, minComplexityAccuracy: 0, minStructuredAccuracy: 0, maxUnderProvisionRate: 1 };
+    const t: Thresholds = { minTaskAccuracy: 1.1, minComplexityAccuracy: 0, minStructuredAccuracy: 0, maxUnderProvisionRate: 1, minStructuredRecall: 0, maxOverProvisionRate: 1 };
     const r = checkThresholds(report, t);
     expect(r.passed).toBe(false);
     expect(r.failures.join(" ")).toMatch(/task accuracy/i);

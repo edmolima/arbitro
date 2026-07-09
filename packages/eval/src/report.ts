@@ -8,6 +8,7 @@ import {
   simulatedCost,
   alwaysPremiumCost,
   tierError,
+  recall,
   type Confusion,
   type TierError,
 } from "./metrics";
@@ -20,6 +21,7 @@ export interface EvalReport {
   taskAccuracy: number;
   complexityAccuracy: number;
   structuredAccuracy: number;
+  structuredRecall: number;
   taskMacroF1: number;
   taskConfusion: Confusion;
   tierConfusion: Confusion;
@@ -34,6 +36,8 @@ export interface Thresholds {
   minComplexityAccuracy: number;
   minStructuredAccuracy: number;
   maxUnderProvisionRate: number;
+  minStructuredRecall: number;
+  maxOverProvisionRate: number;
 }
 
 export function evaluate(dataset: EvalDataset, costPreference = 0.5): EvalReport {
@@ -57,6 +61,7 @@ export function evaluate(dataset: EvalDataset, costPreference = 0.5): EvalReport
     taskAccuracy: accuracy(expTask, predTask),
     complexityAccuracy: accuracy(expComplexity, predComplexity),
     structuredAccuracy: accuracy(expStructured, predStructured),
+    structuredRecall: recall(expStructured, predStructured, "true"),
     taskMacroF1: macroF1(expTask, predTask, TASK_LABELS),
     taskConfusion: confusion(expTask, predTask, TASK_LABELS),
     tierConfusion: confusion(expTier, predTier, TIER_LABELS),
@@ -78,9 +83,11 @@ export function formatReport(r: EvalReport): string {
     `  task accuracy:        ${pct(r.taskAccuracy)}`,
     `  complexity accuracy:  ${pct(r.complexityAccuracy)}`,
     `  structured accuracy:  ${pct(r.structuredAccuracy)}`,
+    `  structured recall:    ${pct(r.structuredRecall)}`,
     `  task macro-F1:        ${r.taskMacroF1.toFixed(3)}`,
     `  under-provision rate: ${pct(r.tierError.underProvisionRate)}`,
     `  over-provision rate:  ${pct(r.tierError.overProvisionRate)}`,
+    `  tier weighted error:  ${r.tierError.weightedError.toFixed(3)}`,
     ``,
     `  simulated cost:       ${r.simulatedCost} (always-premium: ${r.alwaysPremiumCost})`,
     `  savings vs premium:   ${r.savingsPct.toFixed(1)}%`,
@@ -101,5 +108,9 @@ export function checkThresholds(
     failures.push(`structured accuracy ${pct(r.structuredAccuracy)} < ${pct(t.minStructuredAccuracy)}`);
   if (r.tierError.underProvisionRate > t.maxUnderProvisionRate)
     failures.push(`under-provision rate ${pct(r.tierError.underProvisionRate)} > ${pct(t.maxUnderProvisionRate)}`);
+  if (r.structuredRecall < t.minStructuredRecall)
+    failures.push(`structured recall ${pct(r.structuredRecall)} < ${pct(t.minStructuredRecall)}`);
+  if (r.tierError.overProvisionRate > t.maxOverProvisionRate)
+    failures.push(`over-provision rate ${pct(r.tierError.overProvisionRate)} > ${pct(t.maxOverProvisionRate)}`);
   return { passed: failures.length === 0, failures };
 }

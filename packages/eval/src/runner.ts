@@ -10,13 +10,17 @@ export function predict(dataset: EvalDataset, costPreference = 0.5): Prediction[
   const arbitro = createArbitro({ costPreference });
   return dataset.cases.map((c) => {
     const d = arbitro.judge(c.prompt);
+    const tier = SLUG_TIER[d.model];
+    if (tier === undefined) {
+      throw new Error(`arbitro returned model "${d.model}" not present in DEFAULT_CATALOG`);
+    }
     return {
       id: c.id,
       task: d.task,
       complexity: d.complexity,
       needs_structured_output: d.needs_structured_output,
       model: d.model,
-      tier: SLUG_TIER[d.model] ?? "medium",
+      tier,
     };
   });
 }

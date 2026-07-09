@@ -13,7 +13,7 @@ const dataset: EvalDataset = {
 
 describe("runEval", () => {
   it("exit code 0 and passing report when thresholds are met", () => {
-    const t: Thresholds = { minTaskAccuracy: 0, minComplexityAccuracy: 0, minStructuredAccuracy: 0, maxUnderProvisionRate: 1 };
+    const t: Thresholds = { minTaskAccuracy: 0, minComplexityAccuracy: 0, minStructuredAccuracy: 0, maxUnderProvisionRate: 1, minStructuredRecall: 0, maxOverProvisionRate: 1 };
     const r = runEval(dataset, t);
     expect(r.exitCode).toBe(0);
     expect(r.output).toMatch(/task accuracy/i);
@@ -21,7 +21,7 @@ describe("runEval", () => {
   });
 
   it("exit code 1 and failure listed when a threshold is not met", () => {
-    const t: Thresholds = { minTaskAccuracy: 1.1, minComplexityAccuracy: 0, minStructuredAccuracy: 0, maxUnderProvisionRate: 1 };
+    const t: Thresholds = { minTaskAccuracy: 1.1, minComplexityAccuracy: 0, minStructuredAccuracy: 0, maxUnderProvisionRate: 1, minStructuredRecall: 0, maxOverProvisionRate: 1 };
     const r = runEval(dataset, t);
     expect(r.exitCode).toBe(1);
     expect(r.output).toMatch(/FAIL/);

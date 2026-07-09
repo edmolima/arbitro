@@ -9,6 +9,19 @@ export function accuracy(expected: string[], predicted: string[]): number {
   return correct / expected.length;
 }
 
+export function recall(expected: string[], predicted: string[], positiveLabel: string): number {
+  let denominator = 0;
+  let numerator = 0;
+  for (let i = 0; i < expected.length; i++) {
+    if (expected[i] === positiveLabel) {
+      denominator++;
+      if (predicted[i] === positiveLabel) numerator++;
+    }
+  }
+  if (denominator === 0) return 1;
+  return numerator / denominator;
+}
+
 export function macroF1(expected: string[], predicted: string[], labels: string[]): number {
   if (labels.length === 0) return 1;
   let sum = 0;

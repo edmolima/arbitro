@@ -6,6 +6,7 @@ import {
   simulatedCost,
   alwaysPremiumCost,
   tierError,
+  recall,
   TIER_COST,
 } from "../src/metrics";
 import type { CostTier } from "arbitro";
@@ -28,6 +29,15 @@ describe("macroF1", () => {
     const f1 = macroF1(["a", "b", "c"], ["a", "b", "a"], ["a", "b", "c"]);
     // class a: tp=1, fp=1, fn=0 → P=0.5 R=1 F1=0.667; b: perfect F1=1; c: tp=0 → F1=0
     expect(f1).toBeCloseTo((2 / 3 + 1 + 0) / 3, 5);
+  });
+});
+
+describe("recall", () => {
+  it("is the fraction of true positives recovered", () => {
+    expect(recall(["true", "true", "false"], ["true", "false", "false"], "true")).toBe(0.5);
+  });
+  it("is 1 (vacuously) when there are no positives", () => {
+    expect(recall(["false", "false"], ["false", "false"], "true")).toBe(1);
   });
 });
 
@@ -61,7 +71,8 @@ describe("tierError", () => {
     const r = tierError(e, p);
     expect(r.underProvisionRate).toBeCloseTo(1 / 3, 5);
     expect(r.overProvisionRate).toBeCloseTo(1 / 3, 5);
-    expect(r.weightedError).toBeGreaterThan(0);
+    // (2*|under diff 1| + 0 exact + 1*|over diff 1|) / 3 = (2 + 0 + 1) / 3 = 1
+    expect(r.weightedError).toBeCloseTo(1, 5);
   });
   it("is zero error for exact tier matches", () => {
     const t: CostTier[] = ["low", "medium", "high"];
