@@ -15,7 +15,7 @@ export function runBatch(costPreference = 0.5): BatchRow[] {
     const d = arbitro.judge(prompt);
     return {
       prompt,
-      model: d.model,
+      model: d.model.slug,
       task: d.task,
       complexity: d.complexity,
       confidence: d.confidence,

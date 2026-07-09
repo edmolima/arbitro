@@ -36,8 +36,8 @@ function startRepl(): void {
 
     const d = createArbitro({ costPreference }).judge(input);
     console.log(
-      `\n  model:        ${d.model}\n` +
-        `  alternatives: ${d.alternatives.join(", ") || "(none)"}\n` +
+      `\n  model:        ${d.model.slug}\n` +
+        `  alternatives: ${d.alternatives.map((a) => a.slug).join(", ") || "(none)"}\n` +
         `  task:         ${d.task}    complexity: ${d.complexity}    confidence: ${d.confidence.toFixed(2)}\n` +
         `  reason:       ${d.reason}\n`,
     );

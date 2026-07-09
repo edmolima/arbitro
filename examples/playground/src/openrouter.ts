@@ -1,6 +1,6 @@
 // End-to-end example: let arbitro pick a model, then actually call it on
 // OpenRouter (an OpenAI-compatible endpoint) using native fetch — no SDK.
-import { judge, type JudgeResult } from "@edmolima/arbitro";
+import { judge, toOpenRouterBody, type JudgeResult } from "@edmolima/arbitro";
 
 export const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 
@@ -10,7 +10,8 @@ export interface OpenRouterRequest {
   body: string;
 }
 
-// Pure — no I/O. Given a routing decision, build the OpenRouter request.
+// Pure — no I/O. Given a routing decision, build the OpenRouter request. The
+// request body comes from the library's `toOpenRouterBody` helper.
 export function buildRequest(
   decision: JudgeResult,
   prompt: string,
@@ -22,10 +23,7 @@ export function buildRequest(
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      model: decision.model,
-      messages: [{ role: "user", content: prompt }],
-    }),
+    body: JSON.stringify(toOpenRouterBody(decision, prompt)),
   };
 }
 
@@ -73,7 +71,7 @@ if (process.argv[1]?.endsWith("openrouter.ts")) {
   ask(p, apiKey)
     .then(({ decision, content }) => {
       console.log(
-        `\narbitro → ${decision.model}  (${decision.task}/${decision.complexity})\n`,
+        `\narbitro → ${decision.model.slug}  (${decision.task}/${decision.complexity})\n`,
       );
       console.log(content + "\n");
     })

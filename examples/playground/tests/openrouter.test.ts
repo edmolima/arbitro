@@ -17,7 +17,7 @@ describe("buildRequest", () => {
     const decision = judge(PROMPT);
     const req = buildRequest(decision, PROMPT, KEY);
     const body = JSON.parse(req.body);
-    expect(body.model).toBe(decision.model);
+    expect(body.model).toBe(decision.model.slug);
     expect(body.messages).toEqual([{ role: "user", content: PROMPT }]);
   });
 });
@@ -32,12 +32,12 @@ describe("ask", () => {
     const { decision, content } = await ask(PROMPT, KEY, fetchImpl as unknown as typeof fetch);
 
     expect(content).toBe("hi");
-    expect(decision.model).toBe(judge(PROMPT).model);
+    expect(decision.model.slug).toBe(judge(PROMPT).model.slug);
     const [url, init] = fetchImpl.mock.calls[0]!;
     expect(url).toBe(OPENROUTER_URL);
     expect(init.method).toBe("POST");
     expect(init.headers.Authorization).toBe(`Bearer ${KEY}`);
-    expect(JSON.parse(init.body).model).toBe(decision.model);
+    expect(JSON.parse(init.body).model).toBe(decision.model.slug);
   });
 
   it("throws on a non-ok response", async () => {
