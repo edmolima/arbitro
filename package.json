@@ -6,7 +6,8 @@
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
-    "dev": "pnpm -F arbitro build && pnpm -F playground dev"
+    "dev": "pnpm -F arbitro build && pnpm -F playground dev",
+    "eval": "pnpm -F @arbitro/eval eval"
   },
   "devDependencies": {
     "typescript": "^5.6.0"
