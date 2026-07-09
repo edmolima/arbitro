@@ -33,6 +33,9 @@ scope. Then:
 npm i @edmolima/arbitro
 ```
 
+New to GitHub Packages? The [consuming guide](./docs/consuming.md) walks through
+token creation, `.npmrc` setup, CI usage, and common errors step by step.
+
 ## Quickstart
 
 ```ts

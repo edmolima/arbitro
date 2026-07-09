@@ -44,6 +44,32 @@ pnpm eval        # run the evaluation harness (offline, gated)
    (e.g. `feat:`, `fix:`, `chore:`, `docs:`).
 5. Open a pull request against `main` with a clear description.
 
+## Releasing (maintainers)
+
+The package `@edmolima/arbitro` is published to GitHub Packages by the
+[`publish` workflow](./.github/workflows/publish.yml), which runs automatically
+when a `v*.*.*` tag is pushed (or a GitHub Release is published). To cut a
+release:
+
+1. Bump `version` in `packages/arbitro/package.json`.
+2. Move the changes under `## [Unreleased]` in `CHANGELOG.md` into a new version
+   section with today's date.
+3. Commit both: `git commit -am "chore: release vX.Y.Z"`.
+4. Tag and push — the tag must match the new version:
+
+   ```bash
+   git tag vX.Y.Z
+   git push origin main vX.Y.Z
+   ```
+
+5. Watch the run under **Actions → Publish**. On success the package appears at
+   `https://github.com/edmolima?tab=packages`.
+
+Publishing uses the workflow's `GITHUB_TOKEN` (`packages: write`) — no personal
+token or npm login is needed. If publish fails with a permissions error, check
+**Settings → Actions → General → Workflow permissions** is set to
+"Read and write permissions".
+
 ## Code of Conduct
 
 By participating, you agree to abide by our
